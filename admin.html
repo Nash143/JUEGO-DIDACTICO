@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GMAO - Centro de Comando UIC</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin-layout.css">
+</head>
+<body class="admin-body">
+
+    <div class="cyber-background"></div>
+
+    <div id="adminAuth" class="container d-flex justify-content-center align-items-center vh-100 float-animation">
+        <form id="adminLoginForm" class="admin-login-box p-5 rounded-4 shadow-lg text-center">
+            <i class="bi bi-shield-lock-fill display-1 text-cyan mb-3"></i>
+            <h2 class="text-white fw-bold font-monospace">ACCESO ROOT <span class="text-cyan">GMAO</span></h2>
+            <p class="text-muted mb-4 small">Conexión encriptada para Supervisores UIC</p>
+            
+            <div class="mb-3 text-start">
+                <input type="text" id="adminUser" class="form-control custom-input form-control-lg" placeholder="Usuario ID" required autocomplete="off">
+            </div>
+            <div class="mb-4 text-start">
+                <input type="password" id="adminPass" class="form-control custom-input form-control-lg" placeholder="Contraseña de Seguridad" required>
+            </div>
+            <button type="submit" class="btn glow-button btn-lg w-100 fw-bold font-monospace">AUTENTICAR</button>
+            <p id="adminAuthError" class="text-danger mt-3 hidden fw-bold"><i class="bi bi-exclamation-triangle-fill"></i> Credenciales denegadas</p>
+        </form>
+    </div>
+
+    <div id="adminDashboard" class="container-fluid py-4 hidden fade-in">
+        
+        <header class="d-flex justify-content-between align-items-center mb-4 p-3 rounded-4 glass-panel border-cyan">
+            <h2 class="text-white m-0 font-monospace fw-bold"><i class="bi bi-cpu-fill text-cyan me-2"></i>Monitoreo Global IoMT</h2>
+            <div class="d-flex gap-3">
+                <button class="btn btn-outline-info font-monospace" data-bs-toggle="modal" data-bs-target="#addAdminModal">
+                    <i class="bi bi-person-plus-fill me-1"></i> Nuevo Admin
+                </button>
+                <button id="btnLogOut" class="btn btn-danger font-monospace"><i class="bi bi-power me-1"></i> Desconectar</button>
+            </div>
+        </header>
+
+        <div class="row g-4 mb-4">
+            <div class="col-md-4">
+                <div class="stat-card p-4 rounded-4 text-center border-cyan">
+                    <h5 class="text-muted text-uppercase mb-1">Operadores Registrados</h5>
+                    <h1 class="display-3 fw-bold text-white mb-0" id="totalUsersCounter">0</h1>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card p-4 rounded-4 text-center border-green">
+                    <h5 class="text-muted text-uppercase mb-1">Evaluaciones Finalizadas</h5>
+                    <h1 class="display-3 fw-bold text-green mb-0" id="finishedUsersCounter">0</h1>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card p-4 rounded-4 text-center border-red">
+                    <h5 class="text-muted text-uppercase mb-1">Bloqueos de Seguridad</h5>
+                    <h1 class="display-3 fw-bold text-danger mb-0" id="blockedUsersCounter">0</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mb-4 justify-content-center podium-row hidden" id="podiumContainer">
+            </div>
+
+        <div class="glass-panel p-4 rounded-4 border-cyan">
+            <ul class="nav nav-pills mb-4 custom-tabs" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active font-monospace fw-bold" data-bs-toggle="pill" data-bs-target="#tab-ranking" type="button"><i class="bi bi-list-ol me-2"></i>RANKING COMPLETO</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link font-monospace fw-bold text-danger" data-bs-toggle="pill" data-bs-target="#tab-blocked" type="button"><i class="bi bi-shield-x me-2"></i>ZONA DE CUARENTENA (Bloqueados)</button>
+                </li>
+            </ul>
+            
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="tab-ranking" role="tabpanel">
+                    <div class="table-responsive">
+                        <table class="table custom-table table-hover align-middle">
+                            <thead>
+                                <tr class="text-cyan font-monospace">
+                                    <th>#</th>
+                                    <th>Identificación del Operador</th>
+                                    <th>Puntaje</th>
+                                    <th>Estado de Conexión</th>
+                                    <th class="text-end">Acción de Red</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rankingTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab-blocked" role="tabpanel">
+                    <div class="table-responsive">
+                        <table class="table custom-table table-hover align-middle">
+                            <thead>
+                                <tr class="text-danger font-monospace">
+                                    <th>Alerta</th>
+                                    <th>Operador Comprometido</th>
+                                    <th>Puntaje Retenido</th>
+                                    <th class="text-end">Resolución de Seguridad</th>
+                                </tr>
+                            </thead>
+                            <tbody id="blockedTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addAdminModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content glass-panel border-cyan">
+                <div class="modal-header border-bottom border-cyan">
+                    <h5 class="modal-title text-cyan font-monospace fw-bold"><i class="bi bi-person-plus-fill me-2"></i>Registrar Nuevo Admin</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="text-white mb-1">ID de Usuario</label>
+                        <input type="text" id="newAdminUser" class="form-control custom-input" placeholder="Ej. supervisor_01">
+                    </div>
+                    <div class="mb-3">
+                        <label class="text-white mb-1">Contraseña</label>
+                        <input type="password" id="newAdminPass" class="form-control custom-input" placeholder="••••••••">
+                    </div>
+                </div>
+                <div class="modal-footer border-top border-cyan">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn glow-button" onclick="crearAdmin()">Registrar Credencial</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/admin.js"></script>
+</body>
+</html>

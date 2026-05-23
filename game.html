@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UIC Simulator - Operación Activa</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/game-layout.css"> </head>
+<body class="game-body overflow-hidden position-relative">
+
+    <div class="biomedical-bg"></div>
+
+    <header class="game-header container-fluid py-3 px-4 d-flex justify-content-between align-items-center shadow-lg">
+        <div class="hud-box player-info">
+            <small class="text-muted d-block text-uppercase font-monospace">Especialista</small>
+            <span class="fw-bold text-white"><i class="bi bi-person-badge-fill text-cyan me-2"></i><span id="displayPlayerName">-</span></span>
+        </div>
+        <div class="hud-box timer-box text-center">
+            <small class="text-muted d-block text-uppercase font-monospace">Tiempo de Respuesta</small>
+            <span class="fw-bold text-warning fs-4"><i class="bi bi-stopwatch-fill me-1"></i><strong id="timer">30</strong>s</span>
+        </div>
+        <div class="hud-box score-box text-end">
+            <small class="text-muted d-block text-uppercase font-monospace">Puntaje Centralizado</small>
+            <span class="fw-bold text-green fs-4"><strong id="score">0</strong> <small class="fs-6 text-muted">PTS</small></span>
+        </div>
+    </header>
+
+    <main class="container my-4 main-game-container">
+        
+        <div class="progress custom-progress-container mb-4" style="height: 6px;">
+            <div id="progressBar" class="progress-bar custom-progress-bar" role="progressbar" style="width: 100%"></div>
+        </div>
+
+        <section id="questionContainer" class="game-card p-4 rounded-4 shadow float-animation">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="category-tag px-3 py-1 rounded-pill" id="questionCategory">Categoría</span>
+                <span class="badge bg-dark text-cyan border border-cyan font-monospace">MODO: DIAGNÓSTICO</span>
+            </div>
+            <h3 id="questionText" class="text-white mb-4 lh-base fw-semibold">Cargando datos del servidor...</h3>
+            <div id="optionsContainer" class="options-grid gap-3"></div>
+        </section>
+
+        <section id="minigameContainer" class="game-card p-4 rounded-4 shadow float-animation hidden">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="category-tag px-3 py-1 rounded-pill bg-warning text-black" id="minigameCategory">Laboratorio de Hardware</span>
+                <span class="badge bg-dark text-warning border border-warning font-monospace">MODO: CALIBRACIÓN FÍSICA</span>
+            </div>
+            
+            <h3 id="minigameText" class="text-white mb-2 fw-semibold">Falla Detectada en Equipamiento</h3>
+            <p class="text-muted small mb-4">Interactúa directamente con la máquina arrastrando el módulo de repuesto adecuado hacia los slots de interfaz.</p>
+
+            <div class="row g-4 align-items-center">
+                <div class="col-md-5">
+                    <div class="tools-rack p-3 rounded-3 text-center">
+                        <h6 class="text-uppercase text-cyan font-monospace mb-3 small">Módulos de Reemplazo</h6>
+                        <div id="toolsContainer" class="d-flex flex-column gap-3">
+                            </div>
+                    </div>
+                </div>
+
+                <div class="col-md-7">
+                    <div class="machine-chassis p-4 rounded-3 position-relative d-flex flex-column justify-content-center align-items-center text-center">
+                        <div class="circuit-line-decor"></div>
+                        <div class="machine-status-led pulse-led-green"></div>
+                        
+                        <div id="dropZone" class="drop-zone-hardware d-flex flex-column justify-content-center align-items-center p-3">
+                            <i class="bi bi-cpu-fill fs-1 text-cyan mb-2 pulse-icon"></i>
+                            <span id="dropText" class="font-monospace text-wrap px-2">Monitor Multiparamétrico <br><small class="text-warning">(ESPERANDO CONEXIÓN...)</small></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="cheatModal" class="modal-overlay hidden">
+        <div class="modal-cyber-content text-center border-red p-5 rounded-4 float-animation">
+            <h1 class="text-danger fw-bold mb-3 glitch-text" data-text="⚠️ CONEXIÓN COMPROMETIDA">⚠️ CONEXIÓN COMPROMETIDA</h1>
+            <p class="text-white fs-5 mb-4">Se detectó el abandono de la terminal segura. Por protocolo estricto de ciberseguridad IoMT, tu sesión fue bloqueada para evitar canibalización o filtración de respuestas.</p>
+            <div class="p-3 bg-dark-red rounded-3 mb-4 border border-danger">
+                <p class="mb-0 text-warning font-monospace"><i class="bi bi-exclamation-triangle-fill me-2"></i>Contacta al Administrador de la UIC para la liberación de tu usuario en el GMAO.</p>
+            </div>
+            <button onclick="location.href='index.html'" class="btn btn-outline-danger btn-lg px-5 font-monospace fw-bold">TERMINAR SESIÓN</button>
+        </div>
+    </div>
+
+    <div id="endModal" class="modal-overlay hidden">
+    <div class="modal-cyber-content text-center border-cyan p-5 rounded-4 float-animation">
+        <div class="success-icon-wrap mb-3"><i class="bi bi-check-circle-fill text-green display-3"></i></div>
+        <h1 class="text-green fw-bold mb-2 font-monospace">🏁 AUDITORÍA EXITOSA</h1>
+        <p class="text-muted mb-4">Los vectores de riesgo e IoMT han sido mitigados y transferidos exitosamente al GMAO centralizado.</p>
+        
+        <div class="score-summary-box py-4 px-3 rounded-4 mb-4">
+            <span class="text-uppercase text-muted d-block small font-monospace tracking-wide">Puntaje Técnico Total</span>
+            <span id="finalScore" class="display-3 fw-bold text-cyan text-shadow-cyan">0</span>
+            <span class="text-cyan d-block font-monospace mt-1">Puntos de Rendimiento</span>
+        </div>
+        
+        <button onclick="location.href='index.html'" class="btn glow-button-green btn-lg w-100 py-3 fw-bold text-uppercase tracking-wider">Cerrar Terminal de Operador</button>
+    </div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+:root {
+    --bg-dark: #050810; /* Aún más oscuro para resaltar los neones */
+    --card-dark: rgba(15, 23, 42, 0.7);
+    --neon-cyan: #00f2fe;
+    --neon-green: #00f5a0;
+    --neon-red: #ff3366;
+    --text-light: #ffffff; /* Blanco puro para máxima legibilidad */
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    margin: 0; 
+    padding: 0;
+    overflow: hidden; /* Evita que el fondo genere barras de desplazamiento */
+}
+
+/* --- NUEVA ANIMACIÓN DE FONDO --- */
+.cyber-background {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: 
+        radial-gradient(circle at 50% 50%, #0d1527 0%, var(--bg-dark) 100%),
+        linear-gradient(rgba(0, 242, 254, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 242, 254, 0.04) 1px, transparent 1px);
+    background-size: 100% 100%, 40px 40px, 40px 40px;
+    z-index: -1;
+    animation: pulse-bg 6s infinite alternate ease-in-out;
+}
+
+@keyframes pulse-bg {
+    0% { filter: brightness(0.8); background-size: 100% 100%, 40px 40px, 40px 40px; }
+    100% { filter: brightness(1.2); background-size: 100% 100%, 42px 42px, 42px 42px; }
+}
+
+/* --- BOTÓN OCULTO DE ADMINISTRADOR --- */
+.admin-access-btn {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    color: rgba(255, 255, 255, 0.15); /* Muy tenue por defecto */
+    font-size: 1.5rem;
+    transition: 0.3s all ease;
+    z-index: 100;
+}
+
+.admin-access-btn:hover {
+    color: var(--neon-cyan);
+    transform: scale(1.2);
+    text-shadow: 0 0 15px var(--neon-cyan);
+}
+
+/* --- FORMULARIO Y TARJETA --- */
+.login-container {
+    max-width: 450px;
+    width: 100%;
+    padding: 15px;
+    z-index: 10;
+}
+
+.form-box {
+    background: var(--card-dark);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 242, 254, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 242, 254, 0.15), inset 0 0 15px rgba(0, 242, 254, 0.05);
+}
+
+.text-cyan { color: var(--neon-cyan); letter-spacing: 1px; }
+
+/* Input Personalizado */
+.custom-input {
+    background: rgba(0, 0, 0, 0.5) !important;
+    border: 1px solid rgba(0, 242, 254, 0.3) !important;
+    color: white !important;
+    transition: 0.3s;
+}
+
+.custom-input:focus {
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.4) !important;
+    border-color: var(--neon-cyan) !important;
+}
+
+.custom-input::placeholder { color: rgba(255, 255, 255, 0.3); }
+
+/* Botón Principal */
+.glow-button {
+    background: linear-gradient(135deg, var(--neon-cyan) 0%, #0056b3 100%);
+    color: white; 
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 242, 254, 0.2);
+}
+
+.glow-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 242, 254, 0.6);
+    color: white;
+}
+
+.error-box {
+    background: rgba(255, 51, 102, 0.15);
+    border: 1px solid var(--neon-red);
+    color: var(--neon-red);
+}
+
+.hidden { display: none !important; }
+
+/* --- ANIMACIONES CONSERVADAS --- */
+.float-animation { animation: float 6s ease-in-out infinite; }
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+}
+
+.glitch { position: relative; color: white; letter-spacing: 2px;}
+.glitch::before, .glitch::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.glitch::before { left: 2px; text-shadow: -1px 0 var(--neon-red); animation: glitch-anim 2s infinite linear alternate-reverse; }
+
+@keyframes glitch-anim {
+    0% { clip-path: inset(20% 0 80% 0); }
+    20% { clip-path: inset(60% 0 10% 0); }
+    40% { clip-path: inset(40% 0 50% 0); }
+    60% { clip-path: inset(80% 0 5% 0); }
+    80% { clip-path: inset(10% 0 70% 0); }
+    100% { clip-path: inset(30% 0 20% 0); }
+}

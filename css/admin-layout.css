@@ -1,0 +1,49 @@
+.admin-body {
+    background-color: #03060d;
+    color: #ffffff;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+}
+
+.admin-login-box {
+    background: rgba(10, 15, 30, 0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 242, 254, 0.3);
+    max-width: 450px;
+    width: 100%;
+}
+
+/* Glassmorphism General */
+.glass-panel {
+    background: rgba(12, 18, 33, 0.75);
+    backdrop-filter: blur(15px);
+}
+.border-cyan { border: 1px solid rgba(0, 242, 254, 0.3) !important; box-shadow: 0 5px 15px rgba(0, 242, 254, 0.05); }
+.border-green { border: 1px solid rgba(0, 245, 160, 0.3) !important; box-shadow: 0 5px 15px rgba(0, 245, 160, 0.05); }
+.border-red { border: 1px solid rgba(255, 51, 102, 0.3) !important; box-shadow: 0 5px 15px rgba(255, 51, 102, 0.05); }
+
+/* Tarjetas de Estadísticas */
+.stat-card {
+    background: linear-gradient(180deg, rgba(20, 30, 50, 0.5) 0%, rgba(10, 15, 30, 0.8) 100%);
+    transition: 0.3s all;
+}
+.stat-card:hover { transform: translateY(-5px); }
+
+/* Tablas Personalizadas Cyber */
+.custom-table { color: #ffffff; margin-bottom: 0; }
+.custom-table thead th { background: rgba(0, 0, 0, 0.5); border-bottom: 2px solid var(--neon-cyan); padding: 15px; }
+.custom-table tbody td { background: transparent; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding: 15px; color: #e2e8f0; }
+.custom-table tbody tr:hover td { background: rgba(0, 242, 254, 0.05); }
+
+/* Pestañas (Tabs) */
+.custom-tabs .nav-link { color: #a0aec0; border-radius: 8px; margin-right: 10px; border: 1px solid transparent; }
+.custom-tabs .nav-link:hover { color: #ffffff; border-color: rgba(255,255,255,0.1); }
+.custom-tabs .nav-link.active { background: rgba(0, 242, 254, 0.15); color: var(--neon-cyan); border-color: var(--neon-cyan); }
+.custom-tabs .nav-link.text-danger.active { background: rgba(255, 51, 102, 0.15); color: var(--neon-red) !important; border-color: var(--neon-red); }
+
+/* Botones de Acción en Tabla */
+.btn-action { padding: 6px 12px; font-size: 0.85rem; border-radius: 6px; font-weight: bold; transition: 0.3s; margin-left: 5px; }
+.btn-unlock { background: rgba(0, 245, 160, 0.1); border: 1px solid var(--neon-green); color: var(--neon-green); }
+.btn-unlock:hover { background: var(--neon-green); color: #000; box-shadow: 0 0 15px var(--neon-green); }
+.btn-delete { background: rgba(255, 51, 102, 0.1); border: 1px solid var(--neon-red); color: var(--neon-red); }
+.btn-delete:hover { background: var(--neon-red); color: #000; box-shadow: 0 0 15px var(--neon-red); }
