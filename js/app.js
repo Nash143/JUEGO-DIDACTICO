@@ -33,67 +33,93 @@ function playSound(type) {
 }
 
 // ==========================================
-// 2. BANCOS DE DATOS (PREGUNTAS Y JUEGOS)
+// 2. BANCOS DE DATOS ADAPTADOS AL DOCUMENTO UIC
 // ==========================================
 const bancoPreguntas = [
     {
-        category: "Infraestructura Física",
-        q: "¿Cuáles son las condiciones ambientales críticas que exige el Laboratorio de Metrología y Calibración de la UIC?",
-        options: ["Temperatura variable y humedad menor al 80%", "Temperatura constante a 20°C ± 2°C y humedad <50%", "Presión negativa constante y ambiente criogénico"],
+        category: "Casos de Estudio Históricos",
+        q: "Según la investigación del incidente de julio de 2025 en el Hospital Civil de Jalandhar (India), ¿cuál fue la causa de la muerte de tres pacientes en ventiladores?",
+        options: [
+            "Un error de programación del personal médico en la interfaz",
+            "Una falla en la planta de oxígeno que afectó el suministro crítico",
+            "Un cortocircuito masivo por falta de mantenimiento en el cableado"
+        ],
         correct: 1
     },
     {
-        category: "Posicionamiento Institucional",
-        q: "¿A quién reporta jerárquicamente la Unidad de Ingeniería Clínica en un hospital de alta complejidad?",
-        options: ["Al jefe de mantenimiento edilicio e infraestructura", "Directamente a la Dirección General o Financiera", "Al área de informática y sistemas"],
+        category: "Calibración de Monitores",
+        q: "Durante la prueba neumática de NIBP (Presión Arterial No Invasiva), ¿cuál es la tolerancia legal exacta que debe marcar el monitor ante el simulador?",
+        options: [
+            "± 3 mmHg",
+            "± 5 mmHg",
+            "± 10 mmHg"
+        ],
+        correct: 0
+    },
+    {
+        category: "Soporte Vital e Infusión",
+        q: "En una bomba de infusión, ¿qué tipo de componente técnico mide constantemente la presión dentro del tubo para detectar oclusiones e interrupciones?",
+        options: [
+            "Un sensor óptico infrarrojo de caída de gotas",
+            "Un transductor piezoeléctrico acoplado al tubo",
+            "Un electrodo galvánico de flujo continuo"
+        ],
         correct: 1
     },
     {
-        category: "Mecánica e Indicadores KPIs",
-        q: "Si la UIC busca evaluar la eficiencia operativa de su taller mecánico ante un reporte de falla, ¿qué indicador debe auditar?",
-        options: ["MTBF (Mean Time Between Failures)", "Índice de obsolescencia acumulada", "MTTR (Mean Time To Repair)"],
-        correct: 2
+        category: "Tecnología Quirúrgica",
+        q: "En un electrobisturí, ¿qué tipo de onda eléctrica genera el calor rápido e intenso capaz de hacer explotar el agua intracelular para realizar un corte puro?",
+        options: [
+            "Una onda senoidal continua",
+            "Una onda modulada intermitente",
+            "Una onda cuadrada de baja frecuencia"
+        ],
+        correct: 0
     },
     {
-        category: "Riesgos Eléctricos",
-        q: "En una instalación eléctrica hospitalaria tipo Grupo 2 (Quirófanos), ¿qué sistema protege al paciente crítico contra microchoques eléctricos?",
-        options: ["Disyuntor termo-magnético estándar de alta velocidad", "Sistema IT con transformador de aislamiento y monitor de línea", "Puesta a tierra básica conectada a la estructura edilicia"],
+        category: "Roles de la Unidad (UIC)",
+        q: "¿Qué función del ingeniero biomédico se encarga de vigilar el comportamiento diario de los equipos e investigar fallas que casi causan un accidente?",
+        options: [
+            "La negociación de contratos con proveedores externos",
+            "La Tecnovigilancia activa del equipamiento",
+            "La actualización del inventario en el software GMAO"
+        ],
         correct: 1
     }
 ];
 
 const bancoMinijuegos = [
     {
-        category: "Auditoría de Seguridad Eléctrica",
-        text: "Detectamos corrientes de fuga elevadas en el chasis de un Monitor Multiparamétrico. ¿Qué herramienta del taller debes conectar para auditarlo bajo norma IEC 60601-1?",
-        correctAnswerId: "tool-ase",
-        chassisLabel: "Monitor Multiparamétrico <br><small class='text-warning'>(Aguardando Analizador de Seguridad)</small>",
+        category: "Calibración de Imagen (Ecógrafo)",
+        text: "El ecógrafo requiere una prueba de resolución axial y lateral para verificar si el software puede distinguir dos filamentos metálicos extremadamente juntos. ¿Qué objeto debes escanear?",
+        correctAnswerId: "tool-fantasma",
+        chassisLabel: "Unidad de Ultrasonido <br><small class='text-warning'>(Aguardando Fantasma de Calibración)</small>",
         tools: [
-            { id: "tool-ase", name: "⚡ Analizador de Seguridad Eléctrica (ASE)" },
-            { id: "tool-bomba", name: "🧪 Analizador de Infusión / Flujo" },
+            { id: "tool-fantasma", name: "🧬 Fantasma con filamentos metálicos" },
+            { id: "tool-ase", name: "⚡ Analizador de Seguridad Eléctrica" },
             { id: "tool-lux", name: "☀️ Luxómetro Digital de Precisión" }
         ]
     },
     {
-        category: "Calibración de Soporte Vital",
-        text: "Un Desfibrilador Bifásico reporta descargas atenuadas en los chequeos matutinos. ¿Qué componente del chasis interno está sufriendo degradación dieléctrica y debe reemplazarse inmediatamente?",
-        correctAnswerId: "tool-cap",
-        chassisLabel: "Bloque de Alta Energía Desfibrilador <br><small class='text-warning'>(Slot de Almacenamiento Vacío)</small>",
+        category: "Soporte Vital y Anestesia",
+        text: "Al realizar la rutina de calibración de una máquina de anestesia, se debe comprobar de manera crítica que el sistema neumático no pierda presión. ¿Qué test debes aplicar?",
+        correctAnswerId: "tool-fuga",
+        chassisLabel: "Bloque Neumático de Anestesia <br><small class='text-warning'>(Slot de Prueba Hermética Vacío)</small>",
         tools: [
-            { id: "tool-res", name: "🎛️ Banco de Resistencias de Carga" },
-            { id: "tool-cap", name: "🔋 Capacitor de Alta Densidad Energética" },
-            { id: "tool-ind", name: "🔌 Bobina Inductora de Filtro RFI" }
+            { id: "tool-burbuja", name: "🧼 Detector ultrasónico de burbujas" },
+            { id: "tool-fuga", name: "🔒 Pruebas de fuga en circuito sellado" },
+            { id: "tool-perf", name: "📈 Simulador de perfusión baja" }
         ]
     },
     {
-        category: "Mitigación de Riesgos Físicos",
-        text: "La sala de Rayos X Intervencionista muestra fugas de radiación secundaria en la última auditoría de blindaje. ¿Qué recubrimiento estructural falló en el taller o sala?",
-        correctAnswerId: "tool-plomo",
-        chassisLabel: "Barrera de Contención de Blindaje <br><small class='text-warning'>(Falta Refuerzo Atómico)</small>",
+        category: "Terapia de Reemplazo Renal",
+        text: "Un equipo de hemodiálisis reporta alarmas críticas debido al riesgo de paros cardíacos por desbalance de sodio y potasio en el paciente. ¿Qué sensor del taller debes auditar?",
+        correctAnswerId: "tool-cond",
+        chassisLabel: "Módulo Hidráulico de Electrolitos <br><small class='text-warning'>(Falta verificar concentración de mezcla)</small>",
         tools: [
-            { id: "tool-cobre", name: "🟫 Malla de Cobre (Jaula Faraday)" },
-            { id: "tool-plomo", name: "⬜ Planchas de Plomo de Alto Espesor (Pb)" },
-            { id: "tool-al", name: "⬜ Láminas de Aluminio Anodizado" }
+            { id: "tool-cond", name: "🧪 Sensor de conductividad eléctrica de líquidos" },
+            { id: "tool-pres", name: "🎛️ Transductor electrónico de presión venosa" },
+            { id: "tool-ox", name: "🩸 Celda de medición de oxígeno disuelto" }
         ]
     }
 ];
@@ -112,7 +138,7 @@ let playerGlobalName = "";
 const loginForm = document.getElementById('loginForm');
 if (loginForm) {
     loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault(); // Evita que la página se recargue por defecto
+        e.preventDefault();
         const nameInput = document.getElementById('fullName').value.trim();
         if(!nameInput) return;
         playSound('correct');
@@ -133,13 +159,12 @@ if (loginForm) {
                     if(errorBox) errorBox.classList.remove('hidden');
                 } else {
                     localStorage.setItem('currentPlayer', nameInput);
-                    window.location.href = 'game.html'; // REDIRECCIÓN EXITOSA
+                    window.location.href = 'game.html';
                 }
             } else {
-                // Registrar nuevo jugador en Firebase
                 await setDoc(docRef, { name: nameInput, score: 0, status: "Activo", timestamp: Date.now() });
                 localStorage.setItem('currentPlayer', nameInput);
-                window.location.href = 'game.html'; // REDIRECCIÓN EXITOSA
+                window.location.href = 'game.html';
             }
         } catch (error) {
             console.error("Error al registrar: ", error);
@@ -155,10 +180,7 @@ if (loginForm) {
 // ==========================================
 // 4. LÓGICA DEL JUEGO (PANTALLA GAME.HTML)
 // ==========================================
-// Verificamos si estamos dentro de la página del juego
 if (document.getElementById('questionContainer')) {
-    
-    // Inicialización al cargar el HTML del juego
     window.addEventListener('DOMContentLoaded', async () => {
         playerGlobalName = localStorage.getItem('currentPlayer');
         if (!playerGlobalName) {
@@ -168,7 +190,6 @@ if (document.getElementById('questionContainer')) {
         
         document.getElementById('displayPlayerName').textContent = playerGlobalName;
         
-        // Sincronizar puntaje (por si el usuario refrescó la página)
         try {
             const docRef = doc(db, "players", playerGlobalName);
             const snap = await getDoc(docRef);
@@ -190,9 +211,8 @@ function loadQuestion() {
     const minigameContainer = document.getElementById('minigameContainer');
     const optionsContainer = document.getElementById('optionsContainer');
 
-    if (!questionContainer || !minigameContainer) return; // Validación de seguridad
+    if (!questionContainer || !minigameContainer) return;
 
-    // Fase 1: Preguntas Clínicas
     if (currentQuestionIndex < bancoPreguntas.length) {
         questionContainer.classList.remove('hidden');
         minigameContainer.classList.add('hidden');
@@ -210,13 +230,11 @@ function loadQuestion() {
             optionsContainer.appendChild(btn);
         });
     } 
-    // Fase 2: Taller de Maquinarias
     else if (currentMinigameIndex < bancoMinijuegos.length) {
         questionContainer.classList.add('hidden');
         minigameContainer.classList.remove('hidden');
         setupHardwareMinigame();
     } 
-    // Fin de Simulación
     else {
         endGame();
     }
@@ -240,7 +258,6 @@ async function evaluateAnswer(selected, correct) {
         playSound('error');
     }
     
-    // Avanzar secuencialmente
     if (currentQuestionIndex < bancoPreguntas.length) {
         currentQuestionIndex++;
     } else {
@@ -256,7 +273,7 @@ function setupHardwareMinigame() {
     const dropZone = document.getElementById('dropZone');
     
     document.getElementById('minigameCategory').textContent = gameData.category;
-    document.getElementById('minigameText').textContent = `Falla Mecánica: ${gameData.category}`;
+    document.getElementById('minigameText').textContent = `${gameData.category}`;
     
     dropZone.className = "drop-zone-hardware d-flex flex-column justify-content-center align-items-center p-3";
     dropZone.innerHTML = `<i class="bi bi-cpu-fill fs-1 text-cyan mb-2 pulse-icon"></i><span id="dropText" class="font-monospace text-wrap px-2">${gameData.chassisLabel}</span>`;
