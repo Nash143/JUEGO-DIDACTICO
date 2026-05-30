@@ -85,6 +85,56 @@ const bancoPreguntas = [
             "La actualización del inventario en el software GMAO"
         ],
         correct: 1
+    },
+    {
+        category: "Capacitación y Operación",
+        q: "Según el análisis operativo de la UIC, ¿cuál es la causa principal por la que muchos equipos médicos sufren daños prematuros en el hospital?",
+        options: [
+            "Defectos de fabricación de fábrica en los sensores de estado sólido",
+            "Un uso incorrecto involuntario por falta de capacitación del personal asistencial",
+            "Fluctuaciones aleatorias e incontrolables en la red Wi-Fi hospitalaria"
+        ],
+        correct: 1
+    },
+    {
+        category: "Gestión de Inventario",
+        q: "Al ingresar datos en el software GMAO, ¿cuál es el propósito técnico y administrativo prioritario de mantener una 'Hoja de Vida' por equipo?",
+        options: [
+            "Trazar el historial exacto de mantenimientos, costos de reparación, ubicación y garantías",
+            "Asignar responsabilidades legales punitivas exclusivamente al personal de enfermería",
+            "Evitar auditorías externas ocultando el costo real de las refacciones"
+        ],
+        correct: 0
+    },
+    {
+        category: "Seguridad Eléctrica",
+        q: "Para certificar un equipo de Clase I según normativas internacionales vigentes en la guía, ¿qué parámetro del chasis metálico debe medirse de manera crítica?",
+        options: [
+            "La resistencia del cable de conexión a tierra de protección",
+            "La frecuencia de resonancia electromagnética de la pantalla",
+            "La impedancia dieléctrica del plástico de los botones"
+        ],
+        correct: 0
+    },
+    {
+        category: "Metrología Clínica",
+        q: "Al ejecutar una calibración en el taller de la UIC, ¿qué define el concepto de 'Trazabilidad' metrológica de los simuladores empleados?",
+        options: [
+            "La velocidad con la que el proveedor realiza el mantenimiento preventivo",
+            "La cadena ininterrumpida de comparaciones acoplada a patrones de referencia nacionales e internacionales",
+            "El registro manual en bitácoras físicas para el control interno del inventario"
+        ],
+        correct: 1
+    },
+    {
+        category: "Adquisición de Tecnologías",
+        q: "En el ciclo de gestión de equipo médico, ¿cuál es la función de la UIC durante la etapa de evaluación de ofertas de adquisición?",
+        options: [
+            "Validar exclusivamente el precio más bajo para maximizar el ahorro económico inmediato",
+            "Analizar la compatibilidad técnica, requerimientos de infraestructura y disponibilidad de soporte posventa",
+            "Firmar las órdenes de pago de manera autónoma sin requerir la aprobación administrativa del hospital"
+        ],
+        correct: 1
     }
 ];
 
@@ -120,6 +170,17 @@ const bancoMinijuegos = [
             { id: "tool-cond", name: "🧪 Sensor de conductividad eléctrica de líquidos" },
             { id: "tool-pres", name: "🎛️ Transductor electrónico de presión venosa" },
             { id: "tool-ox", name: "🩸 Celda de medición de oxígeno disuelto" }
+        ]
+    },
+    {
+        category: "Seguridad Eléctrica de Chasis",
+        text: "Un monitor multiparamétrico en la UTI Neonatal presenta sospechas de corrientes de fuga elevadas que comprometen la seguridad del paciente. ¿Qué instrumento debes conectar?",
+        correctAnswerId: "tool-ase",
+        chassisLabel: "Terminal Terrestre del Monitor <br><small class='text-warning'>(Esperando Certificador de Seguridad Eléctrica)</small>",
+        tools: [
+            { id: "tool-flow", name: "💨 Analizador de flujo neumático" },
+            { id: "tool-ase", name: "⚡ Analizador de Seguridad Eléctrica" },
+            { id: "tool-tach", name: "⏱️ Tacómetro óptico digital" }
         ]
     }
 ];
